@@ -12,14 +12,8 @@ export const splitHeadline = (h: string) => h.split(/\s*[|•·–—]\s*/).filt
 
 const THEME_ICONS: IconName[] = ['brain', 'heartPulse', 'sprout'];
 
-interface Props {
-  resume: Resume;
-  isExample: boolean;
-  onUpload: () => void;
-}
-
 /** The photo banner: desk by a sunny window, the motto written on the laptop screen. */
-export function Hero({ resume, isExample, onUpload }: Props) {
+export function Hero({ resume }: { resume: Resume }) {
   const [role, focus] = splitHeadline(resume.headline);
   const themes = (resume.interests.length ? resume.interests : resume.skills).slice(0, 3);
   const motto = (resume.motto || 'Better choices. Brighter futures.').replace(/[.!]/g, '').split(/\s+/).slice(0, 5);
@@ -42,11 +36,6 @@ export function Hero({ resume, isExample, onUpload }: Props) {
       </div>
 
       <div className="banner__copy">
-        {isExample && (
-          <button className="banner__example" onClick={onUpload}>
-            <span className="banner__dot" /> Example profile — upload your CV to make it yours <Icon name="arrowRight" size={13} />
-          </button>
-        )}
         <p className="label banner__label">{focus || role || 'Portfolio'}</p>
         <h1 className="display banner__title" data-search>
           {resume.name}

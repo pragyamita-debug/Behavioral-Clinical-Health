@@ -120,24 +120,6 @@
   max-width: 560px;
   padding: 24px 34px;
 }
-.banner__example {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font-size: 11.5px;
-  backdrop-filter: blur(6px);
-  transition: background 0.3s;
-}
-.banner__example:hover { background: rgba(255, 255, 255, 0.22); }
-.banner__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sun); animation: ping 2s ease-out infinite; }
-@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255, 214, 138, 0.7); } 70%, 100% { box-shadow: 0 0 0 7px rgba(255, 214, 138, 0); } }
 
 .banner__label { color: rgba(255, 255, 255, 0.85); animation: rise 0.9s var(--ease-out) both; }
 .banner__title {
@@ -192,7 +174,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .banner__art img, .banner__sun, .banner__rays, .banner__beam, .banner__note span, .banner__heart,
-  .banner__label, .banner__title, .banner__intro, .banner__themes li, .banner__dot {
+  .banner__label, .banner__title, .banner__intro, .banner__themes li {
     animation: none;
     opacity: 1;
     clip-path: none;

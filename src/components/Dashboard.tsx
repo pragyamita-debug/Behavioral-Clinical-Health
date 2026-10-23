@@ -47,7 +47,7 @@ export function Dashboard({ profile, isExample, onUploadNew, onEdit, onReset, on
       {menu && <button className="scrim" aria-label="Close navigation" onClick={() => setMenu(false)} />}
 
       <main className="main">
-        <Hero resume={resume} isExample={isExample} onUpload={onUploadNew} />
+        <Hero resume={resume} />
         <StatRow resume={resume} />
         <div className="content">
           <AboutRow resume={resume} isExample={isExample} onDownloadCv={onDownloadCv} />

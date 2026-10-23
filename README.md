@@ -11,8 +11,8 @@ Everything runs in the browser. The CV is read client-side and never sent to a s
 ## How it works
 
 0. **Example first** — the page opens on the full design filled with neutral placeholder text
-   (`src/data/placeholder.ts`: “Your Name”, “Your Role”, “Project One”…). The chip in the banner and the
-   avatar menu both open the upload screen.
+   (`src/data/placeholder.ts`: “Your Name”, “Your Role”, “Project One”…). The avatar menu (top right)
+   opens the upload screen.
 1. **Upload** — drag a CV onto the drop zone, or try the bundled sample (`src/data/sample-cv.txt`, a fictional behavioural psychologist).
 2. **Read** — PDF text comes from pdf.js, Word files from mammoth; both load only when needed.
 3. **Parse** — `src/lib/parseResume.ts` splits the text into sections (Profile, Experience, Education,
