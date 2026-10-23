@@ -6,7 +6,7 @@ motto written on the laptop, and a morning sun rising in the window.
 
 Everything runs in the browser. The CV is read client-side and never sent to a server.
 
-**Live site:** https://pragyamita-debug.github.io/behavioral-clinical-health/ (after Pages is switched on — see below)
+**Live site:** https://pragyamita-debug.github.io/Behavioral-Clinical-Health/ (after Pages is switched on — see below)
 
 ## How it works
 
