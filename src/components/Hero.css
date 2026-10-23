@@ -1,0 +1,201 @@
+/* ================= photo banner ================= */
+
+.banner {
+  --h: 300px;
+  position: relative;
+  height: var(--h);
+  overflow: hidden;
+  isolation: isolate;
+  background: #6b5a48;
+  color: #fff;
+}
+
+/* the art keeps the photo's own aspect ratio so the sun and the writing on the laptop stay put */
+.banner__art {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 50%;
+  width: max(100%, calc(var(--h) * 2.86));
+  aspect-ratio: 2145 / 750;
+  translate: 0 -50%;
+}
+.banner__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: banner-in 1.8s var(--ease-out) both, drift 30s 1.8s ease-in-out infinite alternate;
+}
+@keyframes banner-in { from { opacity: 0; transform: scale(1.06); } }
+@keyframes drift { to { transform: scale(1.035) translateX(-0.6%); } }
+
+/* warm veil behind the copy, as in the design */
+.banner::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(78, 62, 48, 0.82) 0%, rgba(92, 74, 58, 0.62) 38%, rgba(92, 74, 58, 0.08) 62%, transparent 75%);
+  pointer-events: none;
+}
+
+/* morning sun coming up in the window, top right */
+.banner__sun {
+  position: absolute;
+  left: 82%;
+  top: 10%;
+  width: 15%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0%, var(--sun) 26%, rgba(255, 200, 110, 0.45) 46%, rgba(255, 190, 100, 0) 70%);
+  mix-blend-mode: screen;
+  animation: sun-rise 3.6s 0.3s var(--ease-out) both, sun-breathe 7s 3.9s ease-in-out infinite;
+}
+.banner__rays {
+  position: absolute;
+  left: 82%;
+  top: 10%;
+  width: 46%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255, 224, 160, 0.3) 0deg 2.5deg, transparent 2.5deg 13deg);
+  -webkit-mask: radial-gradient(circle, transparent 14%, #000 22%, transparent 62%);
+  mask: radial-gradient(circle, transparent 14%, #000 22%, transparent 62%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: rays-in 2.2s 2.4s var(--ease-out) forwards, spin 110s linear infinite;
+}
+/* a slow shaft of light sweeping across the desk */
+.banner__beam {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 226, 170, 0.22) 52%, transparent 62%);
+  mix-blend-mode: screen;
+  animation: beam 9s 2s ease-in-out infinite;
+  translate: -60% 0;
+}
+@keyframes sun-rise {
+  from { opacity: 0; transform: translateY(120%) scale(0.7); }
+  40% { opacity: 1; }
+}
+@keyframes sun-breathe { 50% { transform: scale(1.07); } }
+@keyframes rays-in { to { opacity: 1; } }
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes beam { 0% { translate: -60% 0; } 60%, 100% { translate: 60% 0; } }
+
+/* handwriting on the laptop screen */
+.banner__note {
+  position: absolute;
+  left: 87%;
+  top: 49%;
+  width: 11%;
+  display: grid;
+  justify-items: center;
+  font-family: var(--font-hand);
+  font-weight: 500;
+  font-size: calc(var(--h) * 0.07);
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.9);
+  transform: rotate(-12deg) skewY(-3deg);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
+}
+.banner__note span { opacity: 0; animation: write 0.7s var(--ease-out) forwards; animation-delay: calc(1.4s + var(--i) * 0.3s); }
+.banner__heart { margin-top: 4px; opacity: 0; animation: write 0.6s 3s var(--ease-out) forwards; }
+@keyframes write {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+/* ---------- copy ---------- */
+
+.banner__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  max-width: 560px;
+  padding: 24px 34px;
+}
+.banner__example {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 11.5px;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s;
+}
+.banner__example:hover { background: rgba(255, 255, 255, 0.22); }
+.banner__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sun); animation: ping 2s ease-out infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255, 214, 138, 0.7); } 70%, 100% { box-shadow: 0 0 0 7px rgba(255, 214, 138, 0); } }
+
+.banner__label { color: rgba(255, 255, 255, 0.85); animation: rise 0.9s var(--ease-out) both; }
+.banner__title {
+  margin-top: 10px;
+  font-size: clamp(28px, 3.1vw, 40px);
+  line-height: 1.12;
+  color: #fff;
+  animation: rise 0.9s 0.1s var(--ease-out) both;
+}
+.banner__title span { display: block; font-style: italic; font-size: 0.78em; color: rgba(255, 255, 255, 0.88); }
+.banner__intro { max-width: 330px; margin-top: 12px; color: rgba(255, 255, 255, 0.86); font-size: 14px; line-height: 1.6; animation: rise 0.9s 0.2s var(--ease-out) both; }
+.banner__themes { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 18px 0 0; padding: 0; list-style: none; font-size: 12px; }
+.banner__themes li { display: inline-flex; align-items: center; gap: 8px; color: rgba(255, 255, 255, 0.92); animation: rise 0.8s var(--ease-out) both; animation-delay: calc(0.35s + var(--i) * 0.12s); }
+.banner__themes svg { transition: transform 0.4s var(--ease-out); }
+.banner__themes li:hover svg { transform: scale(1.2) rotate(-8deg); color: var(--sun); }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+
+/* ================= stat cards ================= */
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 20px 24px 0; }
+.stat > .glow-card__body { display: grid; justify-items: start; gap: 2px; padding: 18px 20px 20px; }
+.stat__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--sage-tint);
+  color: var(--forest);
+  transition: transform 0.5s var(--ease-out), background 0.3s, color 0.3s;
+}
+.stat:hover .stat__icon { transform: rotate(-10deg) scale(1.08); background: var(--forest); color: #fff; }
+.stat__value { font-family: var(--font-head); font-size: 30px; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat__value i { font-style: normal; color: var(--accent); display: inline-block; opacity: 0; transform: translateY(6px); transition: opacity 0.4s, transform 0.5s var(--ease-out); }
+.stat__value i.is-on { opacity: 1; transform: none; }
+.stat__label { font-size: 13.5px; color: var(--text); }
+.stat__sub { margin-top: 6px; color: var(--muted); font-size: 11.5px; }
+
+/* ================= responsive ================= */
+
+@media (max-width: 1100px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .banner { --h: 420px; }
+  .banner::before { background: linear-gradient(180deg, rgba(78, 62, 48, 0.78) 0%, rgba(92, 74, 58, 0.55) 60%, rgba(92, 74, 58, 0.2) 100%); }
+  .banner__copy { justify-content: flex-start; padding: 26px 20px; }
+  .banner__note { display: none; }
+  .stats { padding: 16px 16px 0; gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner__art img, .banner__sun, .banner__rays, .banner__beam, .banner__note span, .banner__heart,
+  .banner__label, .banner__title, .banner__intro, .banner__themes li, .banner__dot {
+    animation: none;
+    opacity: 1;
+    clip-path: none;
+  }
+  .banner__beam { display: none; }
+}
